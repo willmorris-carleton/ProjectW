@@ -1,0 +1,23 @@
+{
+  "name": "projectw",
+  "version": "1.0.0",
+  "description": "A server which allows me and my family to interact with my dog when we are not home",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zomboss99/ProjectW.git"
+  },
+  "author": "Will Morris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zomboss99/ProjectW/issues"
+  },
+  "homepage": "https://github.com/Zomboss99/ProjectW#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
