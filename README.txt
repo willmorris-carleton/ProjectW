@@ -1,0 +1,1 @@
+This is a project to have a server which will allow my family to see and interact with my dog over the internet.
