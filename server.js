@@ -1,6 +1,7 @@
 //Constants and requires
 const S_USER = "win";
 const S_PASS = "ston";
+const domain = '10.0.0.178';
 const express = require('express');
 const session = require('express-session');
 const fs = require('fs'); 
@@ -8,7 +9,7 @@ const player = require('play-sound')()
 
 //Setup server
 let app = express();
-var server = require('http').Server(app);
+var server = require('https').createServer({key: fs.readFileSync('private/server.key'),cert: fs.readFileSync('private/server.cert')}, app);
 var io = require('socket.io')(server);
 
 
@@ -22,8 +23,8 @@ app.post('/login', express.json(), auth, getStream);
 app.get('/stream', auth, getStream);
 app.get('/stream.js', auth, getStreamJS);
 
-server.listen(3000);
-console.log("Listening on port 3000")
+server.listen(8080, domain);
+console.log("Listening on " + domain + ":8080");
 
 function auth(req,res,next) {
     //If sessions says user is already logged in, allow access
