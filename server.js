@@ -79,13 +79,41 @@ function getIndex(req,res) {
 
 }
 
+const cv = require('opencv4nodejs');
+const fps = 15;
+let wCap = null;
+let connected = 0;
+let streaming = null;
+function streamImg() {
+    const frame = wCap.read();
+	const image = cv.imencode('.jpg', frame).toString('base64');
+	io.emit('image', image);
+}
+
 //When a socket connects
 io.on('connection', socket =>{
     console.log("Someone has connected");
+    connected++;
+    if (!streaming) {
+        streaming = setInterval(streamImg, 1000/fps);
+        wCap = new cv.VideoCapture(0);
+    }
     socket.on('interact', function(str) {
         console.log("Recieved "+str);
     });
     socket.on('disconnect', function() {
-        console.log("Someone disconnected")
+        console.log("Someone disconnected");
+        connected--;
+        //If no one is watching anymore then stop streaming
+        if (connected == 0) {
+            //Clear interval loop which is streaming photos
+            clearInterval(streaming);
+            streaming = null;
+            console.log("Stopped Streaming as no one is watching.")
+            //Turn off webcam
+            wCap.release();
+            OPENCV_VIDEOIO_PRIORITY_MSMF = 0;
+            delete wCap;
+        }
     })
 });
