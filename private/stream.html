@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Winston Live</title>
+    <link rel="stylesheet" href="client.css"></link>
     <script defer src="stream.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -9,11 +10,11 @@
     <img src="winston.jpg" id="waitingImg"></img><br>
     <script>
     let img = document.getElementById("waitingImg");
-    img.width = 3*window.innerWidth/4;
-    img.height = 3*img.width / 4;
+    img.width = 2*window.innerWidth/3;
+    img.height = 2*img.width / 3;
     </script>
-    <input type="button" value="Say Hello!" onclick="interact('Hello!')"></input>
-    <input type="button" value="Say I love you" onclick="interact('I love you!')"></input>
-    <input type="button" value="Say Treat!" onclick="interact('Treat!')"></input>
+    <input type="button" class="button" value="Say Hello!" onclick="interact('Hello!')"></input>
+    <input type="button" class="button" value="Say I love you" onclick="interact('I love you!')"></input>
+    <input type="button" class="button" value="Say Treat!" onclick="interact('Treat!')"></input>
 </body>
 </html>
