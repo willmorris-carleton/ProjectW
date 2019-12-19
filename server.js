@@ -3,6 +3,7 @@ const S_USER = "win";
 const S_PASS = "ston";
 const express = require('express');
 const session = require('express-session');
+const fs = require('fs'); 
 let app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -92,7 +93,7 @@ function streamImg() {
 
 //When a socket connects
 io.on('connection', socket =>{
-    console.log("Someone has connected");
+    logConnection();
     connected++;
     if (!streaming) {
         streaming = setInterval(streamImg, 1000/fps);
@@ -117,3 +118,12 @@ io.on('connection', socket =>{
         }
     })
 });
+
+function logConnection() {
+    let date = new Date();
+    let log = `Someone connected at ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}\n`;
+    console.log(log);
+    fs.appendFile('private/connectionlog.txt', log, function(err) {
+        if (err) throw err;
+    });
+}
