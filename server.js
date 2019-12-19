@@ -4,6 +4,9 @@ const S_PASS = "ston";
 const express = require('express');
 const session = require('express-session');
 let app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
 
 //Once user connects, a session is created
 app.use(session({ secret: 'winniep'}));
@@ -15,7 +18,7 @@ app.post('/login', express.json(), auth, getStream);
 app.get('/stream', auth, getStream);
 app.get('/stream.js', auth, getStreamJS);
 
-app.listen(3000);
+server.listen(3000);
 console.log("Listening on port 3000")
 
 function auth(req,res,next) {
@@ -75,3 +78,14 @@ function getIndex(req,res) {
     }
 
 }
+
+//When a socket connects
+io.on('connection', socket =>{
+    console.log("Someone has connected");
+    socket.on('interact', function(str) {
+        console.log("Recieved "+str);
+    });
+    socket.on('disconnect', function() {
+        console.log("Someone disconnected")
+    })
+});

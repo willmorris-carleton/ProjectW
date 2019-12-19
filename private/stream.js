@@ -1,5 +1,6 @@
-console.log("Ran stream.js code!")
+let socket = io.connect('http://localhost:3000');
+console.log("Socket Created!")
 
 function interact(str) {
-    console.log(str)
+    socket.emit('interact', str);
 }
