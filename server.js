@@ -4,6 +4,9 @@ const S_PASS = "ston";
 const express = require('express');
 const session = require('express-session');
 const fs = require('fs'); 
+const player = require('play-sound')()
+
+//Setup server
 let app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -100,7 +103,7 @@ io.on('connection', socket =>{
         wCap = new cv.VideoCapture(0);
     }
     socket.on('interact', function(str) {
-        console.log("Recieved "+str);
+        playSound(str);
     });
     socket.on('disconnect', function() {
         console.log("Someone disconnected");
@@ -119,11 +122,32 @@ io.on('connection', socket =>{
     })
 });
 
+function playSound(sound) {
+    console.log("Recieved "+sound);
+    switch(sound) {
+        case "Hello!":
+            player.play('private/hello.mp3', function(err){
+                if (err) throw err
+            });
+            break;
+        case "I love you!":
+            player.play('private/loveyou.wav', function(err){
+                if (err) throw err
+            });
+            break;
+        case "Treat!":
+            player.play('private/loveyou.wav', function(err){
+                if (err) throw err
+            });
+            break;
+    }
+}
+
 function logConnection() {
     let date = new Date();
-    let log = `Someone connected at ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}\n`;
+    let log = `Someone connected at ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`;
     console.log(log);
-    fs.appendFile('private/connectionlog.txt', log, function(err) {
+    fs.appendFile('private/connectionlog.txt', log+'\n', function(err) {
         if (err) throw err;
     });
 }
