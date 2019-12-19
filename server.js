@@ -12,7 +12,8 @@ app.use(session({ secret: 'winniep'}));
 app.use(express.static('public'));
 app.get('/', getIndex);
 app.post('/login', express.json(), auth, getStream);
-app.get('/stream', auth, getStream)
+app.get('/stream', auth, getStream);
+app.get('/stream.js', auth, getStreamJS);
 
 app.listen(3000);
 console.log("Listening on port 3000")
@@ -53,6 +54,12 @@ function auth(req,res,next) {
 function getStream(req, res) {
     res.type("html")
     res.status(200).sendFile(__dirname + "/private/stream.html");
+}
+
+
+function getStreamJS(req, res) {
+    res.type("js");
+    res.status(200).sendFile(__dirname + "/private/stream.js");
 }
 
 function getIndex(req,res) {
