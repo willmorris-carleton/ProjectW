@@ -6,7 +6,7 @@ function login() {
     let req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            alert("That is the correct username and password!")
+            window.location.href = "http://localhost:3000/stream";
         }
         else if (this.readyState == 4 && this.status != 200){
             console.log("Error, probably wrong info given")

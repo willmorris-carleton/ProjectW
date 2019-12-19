@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Zomboss99/ProjectW#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-session": "^1.17.0"
   }
 }
