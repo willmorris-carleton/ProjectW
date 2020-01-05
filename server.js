@@ -1,7 +1,7 @@
 //Constants and requires
-const S_USER = "win";
-const S_PASS = "ston";
-const domain = '10.0.0.178';
+const S_USER = "win"; //INSERT YOURN USERNAME HERE
+const S_PASS = "ston"; //INSERT YOUR PASSWORD HERE
+const domain = 'https://localhost'; // INSERT YOUR DOMAIN HERE
 const express = require('express');
 const session = require('express-session');
 const fs = require('fs'); 
@@ -24,9 +24,10 @@ app.post('/login', express.json(), auth, getStream);
 app.get('/stream', auth, getStream);
 app.get('/stream.js', auth, getStreamJS);
 
-server.listen(8080, domain);
+server.listen(8080);
 console.log("Listening on " + domain + ":8080");
 
+//Middle function to determine if user is authorized to watch stream
 function auth(req,res,next) {
     //If sessions says user is already logged in, allow access
     if (req.session.loggedin && req.session.user == S_USER && req.session.pass == S_PASS) {
@@ -60,17 +61,19 @@ function auth(req,res,next) {
     }
 }
 
+//To return stream
 function getStream(req, res) {
     res.type("html")
     res.status(200).sendFile(__dirname + "/private/stream.html");
 }
 
-
+//To return stream js
 function getStreamJS(req, res) {
     res.type("js");
     res.status(200).sendFile(__dirname + "/private/stream.js");
 }
 
+//When getting index page determine if logged in or not
 function getIndex(req,res) {
     if (req.session.loggedin) {
         res.type("html");
@@ -85,6 +88,7 @@ function getIndex(req,res) {
 
 }
 
+//To stream photos from server webcam
 const cv = require('opencv4nodejs');
 const fps = 15;
 let wCap = null;
@@ -124,6 +128,7 @@ io.on('connection', socket =>{
     })
 });
 
+//To play sounds from server computer
 function playSound(sound) {
     console.log("Recieved "+sound);
     switch(sound) {
@@ -145,6 +150,7 @@ function playSound(sound) {
     }
 }
 
+//To log all people who have viewed the stream (will appear under private folder)
 function logConnection() {
     let date = new Date();
     let log = `Someone connected at ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`;
