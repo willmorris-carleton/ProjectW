@@ -41,3 +41,11 @@ Once the server is running you can visit the site on your local machine at https
 * Username and Password are given to server using cookies which are encrypted using https
 * Easy to set up with your ip address so you can portforward requests from clients through your router to the computer you are using as a server
 * Entire server is designed with REST in mind
+
+## Screenshots
+
+### Login Screen
+![LogIn](https://imgur.com/lQuIR99.png)
+
+### Live Stream Page
+![Stream](https://imgur.com/8g6h8Mb.png)
