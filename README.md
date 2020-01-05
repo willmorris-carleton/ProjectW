@@ -32,5 +32,5 @@ Once finished, you can run the server on your local machine by typing
 node server.js
 ```
 
-Once the server is running you can visit the site on your local machine at http://localhost:3000/
+Once the server is running you can visit the site on your local machine at https://localhost:8080/
 
