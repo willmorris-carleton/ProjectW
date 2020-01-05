@@ -1,8 +1,8 @@
-# ProjectW - A dog Surveillence System
+# ProjectW - A Dog Surveillence System
 
 This project was created to allow my family to see and interact with my dog (who's name is Winston) over the internet. The goal was to create a server which would have security and practicality as the main priorities.
 
-## Built With
+### Built With
 
 * [Express](https://expressjs.com/) - The web framework used
 * [Express-session](https://github.com/expressjs/session) - Cookie system used
@@ -32,4 +32,5 @@ Once finished, you can run the server on your local machine by typing
 node server.js
 ```
 
-To visit the site go to http://localhost:3000/
+Once the server is running you can visit the site on your local machine at http://localhost:3000/
+
