@@ -34,3 +34,10 @@ node server.js
 
 Once the server is running you can visit the site on your local machine at https://localhost:8080/
 
+## Features
+
+* Logging system to see when someone starts watching
+* Camera is only on if someone is watching
+* Username and Password are given to server using cookies which are encrypted using https
+* Easy to set up with your ip address so you can portforward requests from clients through your router to the computer you are using as a server
+* Entire server is designed with REST in mind
