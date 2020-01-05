@@ -19,6 +19,7 @@ app.use(session({ secret: 'winniep'}));
 //Serve up files
 app.use(express.static('public'));
 app.get('/', getIndex);
+app.get('//', getIndex);
 app.post('/login', express.json(), auth, getStream);
 app.get('/stream', auth, getStream);
 app.get('/stream.js', auth, getStreamJS);

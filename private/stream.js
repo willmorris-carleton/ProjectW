@@ -1,4 +1,4 @@
-let socket = io.connect('https://10.0.0.178:8080');
+let socket = io.connect('https://174.116.36.175:8080');
 console.log("Socket Created!")
 
 function interact(str) {

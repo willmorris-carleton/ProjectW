@@ -1,4 +1,4 @@
-const domain = '10.0.0.178';
+const domain = '174.116.36.175';
 function login() {
     let user = document.getElementById("user").value;
     let pass = document.getElementById("pass").value;
