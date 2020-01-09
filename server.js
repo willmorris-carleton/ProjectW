@@ -16,7 +16,7 @@ var io = require('socket.io')(server);
 //Once user connects, a session is created
 app.use(session({ secret: 'winniep'}));
 
-//Serve up files
+//Serve up files based off of request
 app.use(express.static('public'));
 app.get('/', getIndex);
 app.get('//', getIndex);
@@ -24,6 +24,7 @@ app.post('/login', express.json(), auth, getStream);
 app.get('/stream', auth, getStream);
 app.get('/stream.js', auth, getStreamJS);
 
+//Listen on port 8080
 server.listen(8080);
 console.log("Listening on " + domain + ":8080");
 
@@ -43,6 +44,7 @@ function auth(req,res,next) {
         res.status(401).send("Not logged in...");
         return;
     }
+    //Get info from request
     let infoGiven = req.body;
     console.log(infoGiven);
     if (infoGiven.user == S_USER && infoGiven.pass == S_PASS) {
@@ -133,24 +135,24 @@ function playSound(sound) {
     console.log("Recieved "+sound);
     switch(sound) {
         case "Hello!":
-            player.play('private/hello.mp3', function(err){
+            player.play('private/hello.mp3', function(err){ // You can change the audio to whatever you want here!
                 if (err) throw err
             });
             break;
         case "I love you!":
-            player.play('private/loveyou.wav', function(err){
+            player.play('private/loveyou.wav', function(err){ // You can change the audio to whatever you want here!
                 if (err) throw err
             });
             break;
         case "Treat!":
-            player.play('private/loveyou.wav', function(err){
+            player.play('private/loveyou.wav', function(err){ // You can change the audio to whatever you want here!
                 if (err) throw err
             });
             break;
     }
 }
 
-//To log all people who have viewed the stream (will appear under private folder)
+//To log all people who have viewed the stream to a text file (will appear under private folder)
 function logConnection() {
     let date = new Date();
     let log = `Someone connected at ${date.toLocaleTimeString()} on ${date.toLocaleDateString()}`;
